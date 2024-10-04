@@ -28,7 +28,7 @@ int exponentiate(int base, int index)
 
 int exponentiate_modularly(int base, int index, int modulus)
 {
-    int remainder = 1;
+    int residue = 1;
     
     base %= modulus;
     
@@ -36,13 +36,13 @@ int exponentiate_modularly(int base, int index, int modulus)
     
     while (index > 0)
     {
-        if (index & 1) remainder = (remainder * base) % modulus;
+        if (index & 1) residue = (residue * base) % modulus;
         
         base = (base * base) % modulus;
         index >>= 1;
     }
     
-    return remainder;    
+    return residue;    
 }
 
 int test_primality(int prime_candidate)
