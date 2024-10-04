@@ -70,13 +70,13 @@ int test_primality(int prime_candidate)
 
     int b₀ = exponentiate_modularly(a, m, prime_candidate);
     
-    if (b₀ == 1 || b₀ == -1 || (b₀ - prime_candidate) == -1) return 1;
+    if (b₀ == 1 || b₀ - prime_candidate == -1) return 1;
     else
     {
         int b₁ = exponentiate_modularly(b₀, 2, prime_candidate);
         
         if (b₁ == 1) return 0;
-        else if (b₁ == -1 || (b₁ - prime_candidate) == -1) return 1;
+        else if (b₁ - prime_candidate == -1) return 1;
     }
     
     return 0;
