@@ -47,7 +47,7 @@ int exponentiate_modularly(int base, int index, int modulus)
 
 int test_primality(int prime_candidate)
 {
-    if (prime_candidate < 2) return 0;
+    if (!(prime_candidate & 1) || (prime_candidate < 2)) return 0;
     
     int n = prime_candidate - 1;
     int k = 1;
