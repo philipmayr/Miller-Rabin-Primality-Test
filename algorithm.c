@@ -45,7 +45,7 @@ int exponentiate_modularly(int base, int index, int modulus)
     return residue;    
 }
 
-int test_primality(int prime_candidate)
+int test_primality(int prime_candidate, int rounds)
 {
     if (!(prime_candidate & 1) || (prime_candidate < 2)) return 0;
     
@@ -70,13 +70,16 @@ int test_primality(int prime_candidate)
 
     int b₀ = exponentiate_modularly(a, m, prime_candidate);
     
-    if (b₀ == 1 || b₀ - prime_candidate == -1) return 1;
-    else
+    for (int round = 1; round < rounds; round++)
     {
-        int b₁ = exponentiate_modularly(b₀, 2, prime_candidate);
-        
-        if (b₁ == 1) return 0;
-        else if (b₁ - prime_candidate == -1) return 1;
+        if (b₀ == 1 || b₀ - prime_candidate == -1) return 1;
+        else
+        {
+            int b₁ = exponentiate_modularly(b₀, 2, prime_candidate);
+            
+            if (b₁ == 1) return 0;
+            else if (b₁ - prime_candidate == -1) return 1;
+        }
     }
     
     return 0;
@@ -92,7 +95,7 @@ int main(int argc, char *argv[])
         {
             prime_candidate = atoi(argv[argument]);
             
-            if (test_primality(prime_candidate)) printf("%d is a prime number.", prime_candidate);
+            if (test_primality(prime_candidate, 12)) printf("%d is a prime number.", prime_candidate);
             else printf("%d is not a prime number.", prime_candidate);
 
             printf("\n\n");
@@ -123,7 +126,7 @@ int main(int argc, char *argv[])
     
     	prime_candidate = input;
     	
-    	if (test_primality(prime_candidate)) printf("%d is a prime number.", prime_candidate);
+    	if (test_primality(prime_candidate, 12)) printf("%d is a prime number.", prime_candidate);
         else printf("%d is not a prime number.", prime_candidate);
         
         printf("\n\n");
