@@ -53,7 +53,7 @@ int exponentiate_modularly(int base, int index, int modulus)
 int test_primality(int prime_candidate, int rounds)
 {
     if (prime_candidate == 2) return 1;
-    if (!(prime_candidate & 1) || prime_candidate < 2) return 0;
+    if (~prime_candidate & 1 || prime_candidate < 2) return 0;
     
     int greatest_power_of_two_factor_of_prime_candidate_less_one = 1;
     int prime_candidate_less_one = prime_candidate - 1;
