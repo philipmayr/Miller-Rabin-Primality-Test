@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
         
         int input, status, buffer;
 
-      	status = scanf("%d", &input);
+      	status = scanf("%d", & input);
       	
       	while (status != 1)
       	{
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
               printf("\n\n");
               printf("Enter a candidate integer to test for primality: ");
               
-              status = scanf("%d", &input);
+              status = scanf("%d", & input);
       	}
       
       	prime_candidate = input;
