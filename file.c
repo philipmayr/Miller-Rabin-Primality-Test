@@ -15,10 +15,11 @@ int get_random_integer(int exclusive_lower_bound, int exclusive_upper_bound)
 
 int exponentiate(int base, int index)
 {
-    int power = 1;
-    
-    if (index == 0) return power;
+    if (base == 0) return 0;
+    if (index == 0) return 1;
     if (index == 1) return base;
+
+    int power = 1;
     
     while (index)
     {
@@ -33,12 +34,12 @@ int exponentiate(int base, int index)
 
 int exponentiate_modularly(int base, int index, int modulus)
 {
+    if (base == 0) return 0;
+    
     int residue = 1;
     
     base %= modulus;
-    
-    if (base == 0) return 0;
-    
+        
     while (index)
     {
         if (index & 1) residue = (residue * base) % modulus;
