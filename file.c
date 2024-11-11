@@ -23,9 +23,7 @@ int exponentiate(int base, int index)
     
     while (index)
     {
-        if (index & 1) power *= base;
-        
-        base *= base;
+        power *= power * exponentiate(base, index & 1);
         index >>= 1;
     }
     
