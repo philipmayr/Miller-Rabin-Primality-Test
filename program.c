@@ -19,7 +19,7 @@ int exponentiate(int base, int index)
     if (base == 0) return 0;
     if (index == 0) return 1;
     if (index == 1) return base;
-
+    
     int power = 1;
     
     while (index)
@@ -28,19 +28,19 @@ int exponentiate(int base, int index)
         index >>= 1;
     }
     
-    return power;    
+    return power;
 }
 
 int exponentiate_modularly(int base, int index, int modulus)
 {
     if (base == 0) return 0;
     if (index == 0) return 1;
-
+    
     if (base > modulus) base %= modulus;
     if (index == 1) return base;
     
     int residue = 1;
-            
+    
     while (index)
     {
         if (index & 1) residue = (residue * base) % modulus;
@@ -49,7 +49,7 @@ int exponentiate_modularly(int base, int index, int modulus)
         index >>= 1;
     }
     
-    return residue;    
+    return residue;
 }
 
 int test_primality(int prime_candidate, int rounds)
@@ -59,10 +59,10 @@ int test_primality(int prime_candidate, int rounds)
     
     int greatest_power_of_two_factor_of_prime_candidate_less_one = 1;
     int prime_candidate_less_one = prime_candidate - 1;
-
+    
     while (prime_candidate_less_one % exponentiate(2, greatest_power_of_two_factor_of_prime_candidate_less_one) == 0) 
         greatest_power_of_two_factor_of_prime_candidate_less_one++;
-
+        
     greatest_power_of_two_factor_of_prime_candidate_less_one--;
     
     int multiplier = prime_candidate_less_one / exponentiate(2, greatest_power_of_two_factor_of_prime_candidate_less_one);
@@ -74,7 +74,7 @@ int test_primality(int prime_candidate, int rounds)
         int greatest_common_divisor = find_greatest_common_divisor(base, prime_candidate);
         
         if (greatest_common_divisor > 1 && greatest_common_divisor < prime_candidate) return 0;
-    
+        
         base = exponentiate_modularly(base, multiplier, prime_candidate);
         
         if (base != 1 && base != prime_candidate_less_one)
@@ -94,7 +94,7 @@ int test_primality(int prime_candidate, int rounds)
 }
 
 int main(int argc, char *argv[])
-{        
+{
     srand(time(NULL));
     
     int prime_candidate;
@@ -107,24 +107,24 @@ int main(int argc, char *argv[])
             
             if (test_primality(prime_candidate, 12)) printf("%d is a prime number.", prime_candidate);
             else printf("%d is not a prime number.", prime_candidate);
-
+            
             printf("\n\n");
         }
     }
     
     for (;;)
-    {    
+    {
         printf("Enter a candidate integer to test for primality: ");
         
         // integer input validation
         // https://jackstromberg.com/2013/02/how-to-validate-numeric-integer-input-in-c/
         
         int input, status, buffer;
-
-      	status = scanf("%d", & input);
-      	
-      	while (status != 1)
-      	{
+        
+        status = scanf("%d", & input);
+        
+        while (status != 1)
+        {
               while ((buffer = getchar()) != EOF && buffer != '\n');
               
               printf("Invalid input.");
@@ -132,10 +132,10 @@ int main(int argc, char *argv[])
               printf("Enter a candidate integer to test for primality: ");
               
               status = scanf("%d", & input);
-      	}
-      
-      	prime_candidate = input;
-      
+        }
+        
+        prime_candidate = input;
+        
         if (test_primality(prime_candidate, 12)) printf("%d is a prime number.", prime_candidate);
         else printf("%d is not a prime number.", prime_candidate);
         
